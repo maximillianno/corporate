@@ -1,7 +1,4 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: maxus
- * Date: 22.09.2017
- * Time: 19:01
- */
+@extends(env('THEME').'.layouts.site')
+@section('navigation')
+{!! $navigation !!}
+@endsection
