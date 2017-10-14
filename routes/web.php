@@ -17,7 +17,7 @@
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home1');
 
 Route::resource('/', 'IndexController', [
             'only' => ['index'],

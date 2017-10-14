@@ -406,9 +406,9 @@
 </div>
 <!-- END BG SHADOW -->
 
-<script type="text/javascript" src="js/jquery.custom.js"></script>
-<script type="text/javascript" src="js/contact.js"></script>
-<script type="text/javascript" src="js/jquery.mobilemenu.js"></script>
+<script type="text/javascript" src="{{asset(env('THEME'))}}/js/jquery.custom.js"></script>
+<script type="text/javascript" src="{{asset(env('THEME'))}}/js/contact.js"></script>
+<script type="text/javascript" src="{{asset(env('THEME'))}}/js/jquery.mobilemenu.js"></script>
 
 </body>
 <!-- END BODY -->

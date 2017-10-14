@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Repositories\MenusRepository;
 use Illuminate\Http\Request;
+use Lavary\Menu\Facade as MenuFacade;
+
 
 class SiteController extends Controller
 {
@@ -35,8 +37,15 @@ class SiteController extends Controller
     protected function renderOutput(){
 
         $menu = $this->getMenu();
-        dd($menu);
-        $navigation = view(env('THEME').'.navigation')->render();
+
+//        foreach ($menu->roots() as $item) {
+//            if ($item->hasChildren()){
+//                dd($item->children());
+//            }
+//
+//        }
+//        dd($menu);
+        $navigation = view(env('THEME').'.navigation')->with('menu', $menu)->render();
         $this->vars = array_add($this->vars, 'navigation', $navigation);
 
         return view($this->template)->with($this->vars);
@@ -45,7 +54,23 @@ class SiteController extends Controller
     protected function getMenu()
     {
         $menu = $this->m_rep->get();
-        return $menu;
+//        dd($menu);
+        $mBuilder = MenuFacade::make('MyNav', function ($m) use ($menu){
+            foreach ($menu as $item) {
+//                dd($item);
+                if ($item->parent == 0) {
+                    $m->add($item->title, $item->path)->id($item->id);
+                } else {
+                    if ($m->find($item->parent)) {
+//                        dd($m->find($item->parent));
+
+                        $m->find($item->parent)->add($item->title, $item->path)->id($item->id);
+                    }
+                }
+
+            }
+        });
+        return $mBuilder;
     }
 
 
