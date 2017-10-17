@@ -28,7 +28,7 @@
     <title>Pink Rio | A strong, powerful and multiporpose WordPress Theme</title>
 
     <!-- [favicon] begin -->
-    <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset(env('THEME'))}}/images/favicon.ico" />
     <link rel="icon" type="image/x-icon" href="{{asset(env('THEME'))}}/images/favicon.ico" />
     <!-- Touch icons more info: http://mathiasbynens.be/notes/touch-icons -->
     <!-- For iPad3 with retina display: -->
@@ -96,7 +96,7 @@
 
                 <!-- START LOGO -->
                 <div id="logo" class="group">
-                    <a href="index.html" title="Pink Rio"><img src="images/logo.png" title="Pink Rio" alt="Pink Rio" /></a>
+                    <a href="index.html" title="Pink Rio"><img src="{{asset(env('THEME'))}}/images/logo.png" title="Pink Rio" alt="Pink Rio" /></a>
                 </div>
                 <!-- END LOGO -->
 
@@ -122,222 +122,14 @@
         <!-- END HEADER -->
 
         <!-- START SLIDER -->
-        <div id="slider-cycle" class="slider cycle no-responsive slider_cycle group" style="height:485px;">
-            <ul class="slider">
-                <li>
-                    <div class="slide-holder" style="background:  url('images/slider-cycle/xx.jpg') no-repeat center center" style="height:483px;">
-                        <div class="slide-content-holder inner" style="height:483px;">
-                            <div class="slide-content-holder-content" style="position: absolute; top:30px;right:650px;">
-                                <div class="slide-title">
-                                    <h2 style="color:#fff">CORPORATE, MULTIPURPOSE.. <br /><span>PINK RIO</span></h2>
-                                </div>
-                                <div class="slide-content" style="color:#fff">
-                                    <p>Nam id quam a odio euismod pellentesque. Etiam congue rutrum risus non vestibulum. Quisque a diam at ligula blandit consequat. Mauris ac mi velit, a tempor neque</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="slide-holder" style="background:  url('images/slider-cycle/00314.jpg') no-repeat center center" style="height:483px;">
-                        <div class="slide-content-holder inner" style="height:483px;">
-                            <div class="slide-content-holder-content" style="position: absolute; top:80px;left:500px;">
-                                <div class="slide-title">
-                                    <h2 style="color:#fff">PINKRIO. <span>STRONG AND POWERFUL.</span></h2>
-                                </div>
-                                <div class="slide-content" style="color:#fff">
-                                    <p>Nam id quam a odio euismod pellentesque. Etiam congue rutrum risus non vestibulum. Quisque a diam at ligula blandit consequat. Mauris ac mi velit, a tempor neque</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="slide-holder" style="background:  url('images/slider-cycle/dd.jpg') no-repeat center center" style="height:483px;">
-                        <div class="slide-content-holder inner" style="height:483px;">
-                        </div>
-                    </div>
-                </li>
-            </ul>
+        @yield('slider')
 
-            <div id="yit-widget-area" class="group">
-                <div class="yit-widget-content inner group">
-                    <div class="widget-first yit-widget widget col1_4 one-fourth col widget-icon-text group">
-                        <img class="icon-img" src="images/icons/cloud.jpg" alt="" />
-                        <h3>Great Design</h3>
-                        <p>A widgetized area: add shorcodes, text, icons and more.</p>
-                    </div>
-                    <div class="yit-widget widget col1_4 one-fourth col widget-last-post group">
-                        <img class="icon-img" src="images/icons/blog1.png" alt="" />
-                        <div>
-                            <h3><a class="text-color" href="#" title="">Blog news</a></h3>
-                            <p>Section shortcodes &amp; sticky posts! <a href="article.html"> | more ></a></p>
-                        </div>
-                    </div>
-                    <div class="widget-last yit-widget widget col1_4 one-fourth col yit_text_quote">
-                        <blockquote class="text-quote-quote">“Anyone who has never made a mistake has never tried anything new.”</blockquote>
-                        <cite class="text-quote-author">Albert Einstein</cite>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <script type="text/javascript">
-            jQuery(document).ready(function($){
-
-                var     yit_slider_cycle_fx = 'easing',
-                    yit_slider_cycle_speed = 800,
-                    yit_slider_cycle_timeout = 3000,
-                    yit_slider_cycle_directionNav = true,
-                    yit_slider_cycle_directionNavHide = true,
-                    yit_slider_cycle_autoplay = true;
-
-                var yit_widget_area_position = function(){
-                    $('#yit-widget-area').css({ top: 33 - $('#yit-widget-area').height() });
-                };
-                $(window).resize(yit_widget_area_position);
-                yit_widget_area_position();
-
-                if( $.browser.msie && parseInt($.browser.version.substr(0,1),10) <= '8' ) {
-                    $('#slider-cycle ul.slider').anythingSlider({
-                        expand              : true,
-                        startStopped        : false,
-                        buildArrows         : yit_slider_cycle_directionNav,
-                        buildNavigation     : false,
-                        buildStartStop      : false,
-                        delay               : yit_slider_cycle_timeout,
-                        animationTime       : yit_slider_cycle_speed,
-                        easing              : yit_slider_cycle_fx,
-                        autoPlay            : yit_slider_cycle_autoplay ? true : false,
-                        pauseOnHover        : true,
-                        toggleArrows        : false,
-                        resizeContents      : true
-                    });
-                } else {
-                    $('#slider-cycle ul.slider').anythingSlider({
-                        expand              : true,
-                        startStopped        : false,
-                        buildArrows         : yit_slider_cycle_directionNav,
-                        buildNavigation     : false,
-                        buildStartStop      : false,
-                        delay               : yit_slider_cycle_timeout,
-                        animationTime       : yit_slider_cycle_speed,
-                        easing              : yit_slider_cycle_fx,
-                        autoPlay            : yit_slider_cycle_autoplay ? true : false,
-                        pauseOnHover        : true,
-                        toggleArrows        : yit_slider_cycle_directionNavHide ? true : false,
-                        onSlideComplete     : function(slider){},
-                        resizeContents      : true,
-                        onSlideBegin        : function(slider) {},
-                        onSlideComplete     : function(slider) {}
-                    });
-
-                }
-            });
-        </script>
-        <div class="mobile-slider">
-            <div class="slider fixed-image inner"><img src="images/slider-cycle/cycle-fixed.jpg" alt="" /></div>
-        </div>
 
         <!-- START PRIMARY -->
         <div id="primary" class="sidebar-right">
             <div class="inner group">
                 <!-- START CONTENT -->
-                <div id="content-home" class="content group">
-                    <div class="hentry group">
-                        <div class="section portfolio">
-
-                            <h3 class="title">Latest projects</h3>
-
-                            <div class="hentry work group portfolio-sticky portfolio-full-description">
-                                <div class="work-thumbnail">
-                                    <a class="thumb"><img src="images/projects/0081-385x192.jpg" alt="0081" title="0081" /></a>
-                                    <div class="work-overlay">
-                                        <h3><a href="project.html">Steep This!</a></h3>
-                                        <p class="work-overlay-categories"><img src="images/categories.png" alt="Categories" /> in: <a href="category.html">Brand Identity</a>, <a href="category.html">Web Design</a></p>
-                                    </div>
-                                </div>
-                                <div class="work-description">
-                                    <h2><a href="project.html">Steep This!</a></h2>
-                                    <p class="work-categories">in: <a href="category.html">Brand Identity</a>, <a href="category.html">Web Design</a></p>
-                                    <p>Nullam volutpat, mauris scelerisque iaculis semper, justo odio rutrum urna, at cursus urna nisl et ipsum. Donec dapibus lacus nec sapien faucibus eget suscipit lorem mattis.</p>
-                                    <p>Donec non mauris ac nulla consectetur pretium sit amet rhoncus [...]
-                                        <a href="project.html" class="read-more">|| Read more</a>
-                                </div>
-                            </div>
-
-                            <div class="clear"></div>
-
-                            <div class="portfolio-projects">
-
-                                <div class="related_project">
-                                    <div class="overlay_a related_img">
-                                        <div class="overlay_wrapper">
-                                            <img src="images/projects/0061-175x175.jpg" alt="0061" title="0061" />
-                                            <div class="overlay">
-                                                <a class="overlay_img" href="images/projects/0061.jpg" rel="lightbox" title=""></a>
-                                                <a class="overlay_project" href="project.html"></a>
-                                                <span class="overlay_title">Love</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <h4><a href="project.html">Love</a></h4>
-                                    <p>Nullam volutpat, mauris scelerisque iaculis semper, justo odio rutrum urna, [...]
-                                </div>
-
-                                <div class="related_project">
-                                    <div class="overlay_a related_img">
-                                        <div class="overlay_wrapper">
-                                            <img src="images/projects/0071-175x175.jpg" alt="0071" title="0071" />
-                                            <div class="overlay">
-                                                <a class="overlay_img" href="images/projects/0071.jpg" rel="lightbox" title=""></a>
-                                                <a class="overlay_project" href="project.html"></a>
-                                                <span class="overlay_title">Kineda</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <h4><a href="project.html">Kineda</a></h4>
-                                    <p>Nullam volutpat, mauris scelerisque iaculis semper, justo odio rutrum urna, [...]
-                                </div>
-
-                                <div class="related_project">
-                                    <div class="overlay_a related_img">
-                                        <div class="overlay_wrapper">
-                                            <img src="images/projects/009-175x175.jpg" alt="009" title="009" />
-                                            <div class="overlay">
-                                                <a class="overlay_img" href="images/projects/009.jpg" rel="lightbox" title=""></a>
-                                                <a class="overlay_project" href="project.html"></a>
-                                                <span class="overlay_title">Guanacos</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <h4><a href="project.html">Guanacos</a></h4>
-                                    <p>Nullam volutpat, mauris scelerisque iaculis semper, justo odio rutrum urna, [...]
-                                </div>
-
-                                <div class="related_project_last related_project">
-                                    <div class="overlay_a related_img">
-                                        <div class="overlay_wrapper">
-                                            <img src="images/projects/0011-175x175.jpg" alt="0011" title="0011" />
-                                            <div class="overlay">
-                                                <a class="overlay_img" href="images/projects/0011.jpg" rel="lightbox" title=""></a>
-                                                <a class="overlay_project" href="project.html"></a>
-                                                <span class="overlay_title">Miller Bob</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <h4><a href="project.html">Miller Bob</a></h4>
-                                    <p>Nullam volutpat, mauris scelerisque iaculis semper, justo odio rutrum urna, [...]
-                                </div>
-
-                            </div>
-                        </div>
-                        <div class="clear"></div>
-                    </div>
-                    <!-- START COMMENTS -->
-                    <div id="comments">
-                    </div>
-                    <!-- END COMMENTS -->
-                </div>
+                @yield('content')
                 <!-- END CONTENT -->
                 <!-- START SIDEBAR -->
                 <div class="sidebar group">
@@ -346,21 +138,21 @@
                         <h3>From our blog</h3>
                         <div class="recent-post group">
                             <div class="hentry-post group">
-                                <div class="thumb-img"><img src="images/articles/001-55x55.png" alt="001" title="001" /></div>
+                                <div class="thumb-img"><img src="{{asset(env('THEME'))}}/images/articles/001-55x55.png" alt="001" title="001" /></div>
                                 <div class="text">
                                     <a href="article.html" title="Section shortcodes &amp; sticky posts!" class="title">Section shortcodes &amp; sticky posts!</a>
                                     <p class="post-date">September 24, 2012</p>
                                 </div>
                             </div>
                             <div class="hentry-post group">
-                                <div class="thumb-img"><img src="images/articles/003-55x55.jpg" alt="003" title="003" /></div>
+                                <div class="thumb-img"><img src="{{asset(env('THEME'))}}/images/articles/003-55x55.jpg" alt="003" title="003" /></div>
                                 <div class="text">
                                     <a href="article.html" title="Nice &amp; Clean. The best for your blog!" class="title">Nice &amp; Clean. The best for your blog!</a>
                                     <p class="post-date">September 24, 2012</p>
                                 </div>
                             </div>
                             <div class="hentry-post group">
-                                <div class="thumb-img"><img src="images/articles/0037-55x55.jpg" alt="0037" title="0037" /></div>
+                                <div class="thumb-img"><img src="{{asset(env('THEME'))}}/images/articles/0037-55x55.jpg" alt="0037" title="0037" /></div>
                                 <div class="text">
                                     <a href="article.html" title="Another theme by YIThemes!" class="title">Another theme by YIThemes!</a>
                                     <p class="post-date">September 24, 2012</p>
@@ -371,7 +163,7 @@
 
                     <div class="widget-last widget text-image">
                         <h3>Customer support</h3>
-                        <div class="text-image" style="text-align:left"><img src="images/callus.gif" alt="Customer support" /></div>
+                        <div class="text-image" style="text-align:left"><img src="{{asset(env('THEME'))}}/images/callus.gif" alt="Customer support" /></div>
                         <p>Proin porttitor dolor eu nibh lacinia at ultrices lorem venenatis. Sed volutpat scelerisque vulputate. </p>
                     </div>
 
