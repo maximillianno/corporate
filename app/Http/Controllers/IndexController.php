@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Menu;
+use App\Repositories\ArticlesRepository;
 use App\Repositories\MenusRepository;
 use App\Repositories\PortfoliosRepository;
 use App\Repositories\SlidersRepository;
@@ -16,11 +17,12 @@ class IndexController extends SiteController
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct(SlidersRepository $slidersRepository, PortfoliosRepository $portfoliosRepository)
+    public function __construct(SlidersRepository $slidersRepository, PortfoliosRepository $portfoliosRepository, ArticlesRepository $articlesRepository)
     {
         parent::__construct(new MenusRepository(new Menu()));
         $this->p_rep = $portfoliosRepository;
         $this->s_rep = $slidersRepository;
+        $this->a_rep = $articlesRepository;
         $this->bar = 'right';
         $this->template = env('THEME').'.index';
     }
@@ -40,76 +42,15 @@ class IndexController extends SiteController
         $content = view(env('THEME').'.content')->with('portfolios', $portfolios)->render();
         $sliders = view(env('THEME').'.slider')->with('sliders', $sliderItems)->render();
 
+        $articles = $this->getArticles();
+//        dd($articles);
+        $this->contentRightBar = view(env('THEME').'.indexBar')->with('articles', $articles)->render();
+
         $this->vars = array_add($this->vars,'sliders', $sliders);
         $this->vars = array_add($this->vars,'content', $content);
         return $this->renderOutput();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 
     public function getSliders()
     {
@@ -133,5 +74,11 @@ class IndexController extends SiteController
 
 
         return $portfolio;
+    }
+
+    private function getArticles()
+    {
+        $articles = $this->a_rep->get(['title', 'created_at','img', 'alias'], Config::get('settings.home_articles_count'));
+        return $articles;
     }
 }
