@@ -16,6 +16,7 @@ class ArticlesRepository extends Repository
     {
         $this->model = $article;
     }
+    
 
 
 }

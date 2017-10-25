@@ -7,22 +7,27 @@
  */
 
 namespace App\Repositories;
-//use Config;
+use Config;
 
 
 abstract class Repository
 {
     protected $model = false;
 
-    public function get($select = '*', $take = false){
+    public function get($select = '*', $take = false, $pagination = false){
         $builder = $this->model->select($select);
         if ($take) {
             $builder->take($take);
         }
+        if ($pagination) {
+            return $this->check($builder->paginate(Config::get('settings.paginate')));
+        }
+
 //        dd($builder);
         return $this->check($builder->get());
     }
 
+    // дает доступ к картинкам, записанным в json
     protected function check($result) {
         if ($result->isEmpty()) {
             return false;
