@@ -26,6 +26,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.2, user-scalable=yes" />
     <meta name="description" content="{{isset($meta_desc)? $meta_desc: ''}}">
     <meta name="keywords" content="{{isset($keywords)? $keywords: ''}}">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>{{$title or 'Pink'}}</title>
 
@@ -78,6 +79,7 @@
     <script type="text/javascript" src="{{asset(env('THEME'))}}/js/shortcodes.js"></script>
     <script type="text/javascript" src="{{asset(env('THEME'))}}/js/jquery.colorbox-min.js"></script> <!-- nav -->
     <script type="text/javascript" src="{{asset(env('THEME'))}}/js/jquery.tweetable.js"></script>
+    <script type="text/javascript" src="{{asset(env('THEME'))}}/js/myscript.js"></script>
 
 </head>
 <!-- END HEAD -->
@@ -125,6 +127,8 @@
 
         <!-- START SLIDER -->
         @yield('slider')
+
+        <div class="wrap_result">sdf</div>
 
 
         <!-- START PRIMARY -->
