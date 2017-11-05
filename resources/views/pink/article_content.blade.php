@@ -44,7 +44,7 @@
         </h3>
         @if(count($article->comments)>0)
         @set($com, $article->comments->groupBy('parent_id'))
-        <ol class="commentlist group">
+        <ol id="blockofcomments" class="commentlist group">
             @foreach($com as $k => $comments)
                 @if($k != 0)
                     @break

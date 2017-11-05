@@ -28,12 +28,16 @@ class ArticlesController extends SiteController
     }
 
     public function show($alias = false){
+
         $article = $this->a_rep->one($alias,['comments'=>true]);
         if ($article) {
             $article->img = json_decode($article->img);
         }
 
 //        dd($article->comments->groupBy('parent_id'));
+        $this->title = $article->title;
+        $this->keywords = $article->keywords;
+        $this->meta_desc = $article->meta_desc;
 
         $content = view(env('THEME').'.article_content')->with('article', $article)->render();
         $this->vars = array_add($this->vars,'content', $content);
@@ -51,6 +55,10 @@ class ArticlesController extends SiteController
      */
     public function index($cat_alias = false)
     {
+        $this->title = 'Блог';
+        $this->keywords = 'String';
+        $this->meta_desc = 'String';
+
         $articles = $this->getArticles($cat_alias);
         $content = view(env('THEME').'.articles_content')->with('articles', $articles);
         $this->vars = array_add($this->vars, 'content', $content);
@@ -68,7 +76,7 @@ class ArticlesController extends SiteController
             $id = Category::select('id')->where('alias', $alias)->first()->id;
             $where = ['category_id',$id];
         }
-        $articles = $this->a_rep->get(['id', 'title', 'alias', 'created_at', 'img', 'desc','user_id', 'category_id'], false, true, $where);
+        $articles = $this->a_rep->get(['id', 'title', 'alias', 'created_at', 'img', 'desc','user_id', 'category_id', 'keywords', 'meta_desc'], false, true, $where);
         if ($articles) {
             $articles->load('user','category','comments');
         }
