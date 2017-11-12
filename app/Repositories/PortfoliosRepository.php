@@ -16,6 +16,14 @@ class PortfoliosRepository extends Repository
     {
         $this->model = $portfolio;
     }
+    public function one($alias, $attr = []){
+        $portfolio = parent::one($alias);
+        if ($portfolio && $portfolio->img) {
+            $portfolio->img = json_decode($portfolio->img);
+        }
+        return $portfolio;
+
+    }
 
 
 }

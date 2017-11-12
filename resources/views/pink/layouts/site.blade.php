@@ -85,7 +85,7 @@
 <!-- END HEAD -->
 
 <!-- START BODY -->
-<body class="no_js responsive {{Route::currentRouteName() == 'home' ? 'page-template-home-php':''}} stretched">
+<body class="no_js responsive {{(Route::currentRouteName() == 'home') || (Route::currentRouteName() == 'portfolios.index') || (Route::currentRouteName() == 'portfolios.show') ? 'page-template-home-php':''}} stretched">
 
 <!-- START BG SHADOW -->
 <div class="bg-shadow">
@@ -129,6 +129,24 @@
         @yield('slider')
 
         <div class="wrap_result">sdf</div>
+
+        @if(Route::currentRouteName() == 'portfolios.index')
+        <div id="page-meta">
+            <div class="inner group">
+                <h3>Welcome to my portfolio page</h3>
+                <h4>... i hope you enjoy my works</h4>
+            </div>
+        </div>
+        @endif
+
+        @if(Route::currentRouteName() == 'contacts')
+            <div id="page-meta">
+                <div class="inner group">
+                    <h3>...Say Hello! :)</h3>
+                    <h4>Get in touch with Pink Rio team</h4>
+                </div>
+            </div>
+        @endif
 
 
         <!-- START PRIMARY -->
