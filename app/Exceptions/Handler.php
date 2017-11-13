@@ -54,7 +54,7 @@ class Handler extends ExceptionHandler
         if ($this->isHttpException($exception)) {
 
             $statusCode = $exception->getStatusCode();
-//            dd($statusCode);
+            dd($statusCode);
             switch ($statusCode) {
                 case '404':
                     $obj = new \App\Http\Controllers\SiteController(new MenusRepository(new Menu()));
@@ -63,6 +63,7 @@ class Handler extends ExceptionHandler
                     return response()->view(env('THEME').'.errors.404',['bar'=>'no', 'title'=>'Страница не найдена', 'navigation'=>$navigation]);
             }
         }
+
         return parent::render($request, $exception);
     }
 }
