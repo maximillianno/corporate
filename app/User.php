@@ -1,7 +1,7 @@
 <?php
 
 namespace App;
-
+use App\Role;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
@@ -28,6 +28,54 @@ class User extends Authenticatable
     ];
 
     public  function articles() {
-        return $this->hasMany('App/Article');
+        return $this->hasMany('App\Article');
+    }
+
+    public function roles() {
+        return $this->belongsToMany('App\Role','role_user');
+    }
+    public  function canDo($permission, $require = false) {
+        if (is_array($permission)) {
+            foreach ($permission as $permItem) {
+                $result = $this->canDo($permItem);
+                if ($result && !$require) {
+                    return true;
+                } elseif (!$result && $require) {
+                    return false;
+                }
+                return $require;
+            }
+
+        } else {
+            foreach ($this->roles as $role) {
+                foreach ($role->permissions as $perm) {
+                    if (str_is($perm->name, $permission)) {
+                        return true;
+                    }
+                }
+            }
+        }
+    }
+    public  function hasRole($name, $require = false) {
+        if (is_array($name)) {
+            foreach ($name as $roleItem) {
+                $result = $this->hasRole($roleItem);
+                if ($result && !$require) {
+                    return true;
+                } elseif (!$result && $require) {
+                    return false;
+                }
+                return $require;
+            }
+
+        } else {
+            foreach ($this->roles as $role) {
+
+                    if ($role->name == $name) {
+                        return true;
+                    }
+
+            }
+        }
     }
 }

@@ -20,7 +20,8 @@ class AdminController extends Controller
 
     public function __construct()
     {
-        $this->user = Auth::user();
+        //не работает в конструкторе, так как он отрабатывается до middleware
+//        $this->user = Auth::user();
 
 
 //        if (!$this->user) {
