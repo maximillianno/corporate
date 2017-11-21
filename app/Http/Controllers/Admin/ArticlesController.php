@@ -2,11 +2,19 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Repositories\ArticlesRepository;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
-class ArticlesController extends Controller
+
+class ArticlesController extends AdminController
 {
+    public function __construct(ArticlesRepository $a_rep)
+    {
+        parent::__construct();
+        $this->a_rep = $a_rep;
+
+        $this->template = env('THEME').'.admin.articles';
+    }
     /**
      * Display a listing of the resource.
      *
@@ -15,6 +23,16 @@ class ArticlesController extends Controller
     public function index()
     {
         //
+        if (\Gate::denies('VIEW_ADMIN_ARTICLES')) {
+            abort(403);
+        }
+        $this->title = 'Менеджер статей';
+        $articles = $this->getArticles();
+        $this->content = view(env('THEME').'.admin.articles_content')->with('articles', $articles)->render();
+
+
+        return $this->renderOutput();
+
     }
 
     /**
@@ -81,5 +99,10 @@ class ArticlesController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    private function getArticles()
+    {
+        return $this->a_rep->get();
     }
 }
