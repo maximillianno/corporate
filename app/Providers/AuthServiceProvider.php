@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Article;
+use App\Policies\ArticlePolicy;
+use App\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
@@ -14,6 +17,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         'App\Model' => 'App\Policies\ModelPolicy',
+        Article::class => ArticlePolicy::class
     ];
 
     /**
@@ -25,11 +29,13 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
+        //первое VIEW_ADMIN - правило проверки авторизации, а передаваемое - пермишн в базе данных
         \Gate::define('VIEW_ADMIN', function($user){
             return $user->canDo('VIEW_ADMIN');
         });
 
-        \Gate::define('VIEW_ADMIN_ARTICLES', function($user){
+        //поставил User перед $user для перехода на canDo()
+        \Gate::define('VIEW_ADMIN_ARTICLES', function(User $user){
             return $user->canDo('VIEW_ADMIN_ARTICLES');
         });
 

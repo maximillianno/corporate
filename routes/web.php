@@ -39,5 +39,6 @@ Route::match(['get', 'post'],'/contacts', ['uses' => 'ContactsController@index',
 
 Route::group(['prefix'=>'/admin', 'middleware' => 'auth'], function (){
    Route::get('/', ['uses' => 'Admin\IndexController@index', 'as' => 'adminIndex']);
-   Route::resource('/articles', 'Admin\ArticlesController');
+//    Route::get('/articles/create', 'Admin\ArticlesController@create')->name('admin.articles.create');
+   Route::resource('/articles/', 'Admin\ArticlesController');
 });

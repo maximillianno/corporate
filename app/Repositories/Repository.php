@@ -53,5 +53,12 @@ abstract class Repository
 
     }
 
+    public function transliterate($title)
+    {
+        $str = mb_strtolower($title, 'UTF-8');
+        return $str;
+
+    }
+
 
 }

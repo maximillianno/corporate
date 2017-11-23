@@ -26,6 +26,9 @@ class ArticlesController extends SiteController
         $this->bar = 'right';
         $this->template = env('THEME').'.articles';
     }
+    public function create() {
+        dd($this);
+    }
 
     public function show($alias = false){
 
