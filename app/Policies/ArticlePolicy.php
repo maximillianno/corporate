@@ -43,6 +43,7 @@ class ArticlePolicy
     public function update(User $user, Article $article)
     {
         //
+        return $user->canDo('UPDATE_ARTICLES');
     }
 
     /**
@@ -60,5 +61,7 @@ class ArticlePolicy
     public function save(User $user) {
         return $user->canDo('ADD_ARTICLES');
     }
+
+
 
 }

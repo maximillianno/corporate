@@ -30,6 +30,9 @@ Route::resource('/', 'IndexController', [
 Route::resource('portfolios', 'PortfolioController', [
     'parameters' => ['portfolios' => 'alias']
 ]);
+//Route::resource('articles', 'ArticlesController',[
+//   'parameters' => ['articles' => 'alias']
+//]);
 Route::resource('articles', 'ArticlesController',[
    'parameters' => ['articles' => 'alias']
 ]);
@@ -40,5 +43,8 @@ Route::match(['get', 'post'],'/contacts', ['uses' => 'ContactsController@index',
 Route::group(['prefix'=>'/admin', 'middleware' => 'auth'], function (){
    Route::get('/', ['uses' => 'Admin\IndexController@index', 'as' => 'adminIndex']);
 //    Route::get('/articles/create', 'Admin\ArticlesController@create')->name('admin.articles.create');
-   Route::resource('/articles/', 'Admin\ArticlesController');
+   Route::resource('/articles/', 'Admin\ArticlesController', [
+//       'parameters' => ['' => 'alias']
+       'parameters' => ['' => 'articles']
+   ]);
 });

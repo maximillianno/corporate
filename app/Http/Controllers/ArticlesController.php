@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Article;
 use App\Category;
 use App\Menu;
 use App\Repositories\ArticlesRepository;
@@ -30,9 +31,11 @@ class ArticlesController extends SiteController
         dd($this);
     }
 
-    public function show($alias = false){
-
+//    public function show(Article $article, $alias = false){
+  public function show($alias = false){
+        // пока оставим так, теперь в переменную алиас передается выбор модели по алиасу
         $article = $this->a_rep->one($alias,['comments'=>true]);
+
         if ($article) {
             $article->img = json_decode($article->img);
         }
