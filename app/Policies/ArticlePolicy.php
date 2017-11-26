@@ -56,6 +56,8 @@ class ArticlePolicy
     public function delete(User $user, Article $article)
     {
         //
+        return ($user->canDo('DELETE_ARTICLES') && $user->id == $article->user_id);
+
     }
 
     public function save(User $user) {
