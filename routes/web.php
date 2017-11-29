@@ -52,4 +52,5 @@ Route::group(['prefix'=>'/admin', 'middleware' => 'auth'], function (){
     Route::resource('/menus', 'Admin\MenusController', [
         'parameters' => ['' => 'menus']
     ]);
+    Route::resource('/users', 'Admin\UsersController');
 });

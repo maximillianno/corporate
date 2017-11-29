@@ -166,11 +166,11 @@
 		
 		var active = 0;
 		$('#accordion input[type=radio]').each(function(ind,it) {
-			
+
 			if($(this).prop('checked')) {
 				active = ind;
 			}
-			
+
 		});
 		
 		$('#accordion').accordion('option','active', active);
